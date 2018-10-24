@@ -10,8 +10,13 @@ document.getElementById('dice').addEventListener('submit', function (event) {
     let total = 0;
 
     ['d4', 'd6', 'd8', 'd10', 'd12', 'd20', 'd100'].forEach(function (id) {
-        for (let i = 0, len = parseInt(document.getElementById(id).value, 10); i < len; i++) {
-            total += roll(1, parseInt(id.substr(1), 10));
+        const max = parseInt(id.substr(1), 10),
+            value = document.getElementById(id).value;
+
+        if (value) {
+            for (let i = 0, len = parseInt(value, 10); i < len; i++) {
+                total += roll(1, max);
+            }
         }
     });
 
