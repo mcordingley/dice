@@ -1,3 +1,8 @@
+body {
+    font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+}
+
 .grid { display: grid; }
 .grid-gap-1 { grid-gap: 0.5rem; }
 .grid-col-4 { grid-template-columns: repeat(4, 1fr); }
@@ -10,6 +15,7 @@
 .border-box { box-sizing: border-box; }
 .border-silver { border-color: silver; }
 .center { text-align: center; }
+.h100 { height: 100%; }
 .mx-auto { margin-left: auto; margin-right: auto; }
 .p1 { padding: .5rem; }
-.h100 { height: 100%; }
+.right-align { text-align: right; }
