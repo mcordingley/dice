@@ -8,6 +8,7 @@
 .block { display: block; }
 .border { border: 1px solid; }
 .border-box { box-sizing: border-box; }
+.border-silver { border-color: silver; }
 .center { text-align: center; }
 .mx-auto { margin-left: auto; margin-right: auto; }
 .p1 { padding: .5rem; }
