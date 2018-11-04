@@ -7,8 +7,16 @@ const input = document.getElementById('input'),
 document.getElementById('dice').addEventListener('submit', function (event) {
     event.preventDefault();
 
+    let expression = input.value;
+
+    if (expression.startsWith('d')) {
+        expression = '1' + expression;
+    }
+
+    expression = expression.replace(/[^\d]d\d+/g, match => match.substr(0, 1) + '1' + match.substr(1));
+
     try {
-        output.innerText = (new Parser(new Tokenizer(input.value))).parse().evaluate();
+        output.innerText = (new Parser(new Tokenizer(expression))).parse().evaluate();
     } catch (e) {
         output.innerText = 'Error';
     }
