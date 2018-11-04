@@ -1,3 +1,8 @@
+import Parser from './Parser.js';
+import Tokenizer from './Tokenizer.js';
+
+window.Tokenizer = Tokenizer;
+
 function readIntFromInput(element) {
     const value = element.value ? parseInt(element.value, 10) : 0;
 
@@ -26,10 +31,13 @@ document.getElementById('dice').addEventListener('submit', function (event) {
 
     total += readIntFromInput(document.getElementById('constant'));
 
+    if (document.getElementById('expression').value) {
+        total += (new Parser(new Tokenizer(document.getElementById('expression').value))).parse().evaluate();
+    }
+
     const node = document.createElement('p');
 
     node.innerText = total;
 
     output.insertBefore(node, output.childNodes[0] || null);
 });
-
