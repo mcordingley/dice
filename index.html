@@ -6,27 +6,40 @@
 
     <title>Dice Roller</title>
 
-    <style>
-        .block { display: block; }
-        .mb2 { margin-bottom: 1rem; }
-        .p1 { padding: .5rem; }
-    </style>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <form id="dice">
-        <h1>Dice Roller</h1>
+    <form id="dice" class="grid grid-col-4 grid-gap-1 mx-auto" style="max-width: 800px;">
+        <div id="output" class="border-box center h100 p1 grid-col-span-4"></div>
 
-        <div class="mb2">
-            <label for="expression">Expression</label>
-            <textarea id="expression" class="block p1"></textarea>
-        </div>
+        <textarea id="input" class="block border-box h100 p1 grid-col-span-3"></textarea>
+        <input type="submit" value="Roll" />
 
-        <div class="mb2">
-            <input type="submit" class="p1" value="Roll" />
-        </div>
+        <input type="button" class="js-calculator-button" value="(">
+        <input type="button" class="js-calculator-button" value=")">
+        <input type="button" id="delete" value="Delete">
+        <input type="button" id="clear" value="Clear">
+
+        <input type="button" class="js-calculator-button" value="7">
+        <input type="button" class="js-calculator-button" value="8">
+        <input type="button" class="js-calculator-button" value="9">
+        <input type="button" class="js-calculator-button" value="/">
+
+        <input type="button" class="js-calculator-button" value="4">
+        <input type="button" class="js-calculator-button" value="5">
+        <input type="button" class="js-calculator-button" value="6">
+        <input type="button" class="js-calculator-button" value="*">
+
+        <input type="button" class="js-calculator-button" value="1">
+        <input type="button" class="js-calculator-button" value="2">
+        <input type="button" class="js-calculator-button" value="3">
+        <input type="button" class="js-calculator-button" value="-">
+
+        <input type="button" class="js-calculator-button" value="d">
+        <input type="button" class="js-calculator-button" value="0">
+        <input type="button" class="js-calculator-button" value=".">
+        <input type="button" class="js-calculator-button" value="+">
     </form>
-
-    <div id="output"></div>
 
     <script type="module" src="dice.js"></script>
 </body>

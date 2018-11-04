@@ -1,14 +1,29 @@
 import Parser from './Parser.js';
 import Tokenizer from './Tokenizer.js';
 
-const output = document.getElementById('output');
+const input = document.getElementById('input'),
+    output = document.getElementById('output');
 
 document.getElementById('dice').addEventListener('submit', function (event) {
     event.preventDefault();
 
-    const node = document.createElement('p');
+    try {
+        output.innerText = (new Parser(new Tokenizer(input.value))).parse().evaluate();
+    } catch (e) {
+        output.innerText = 'Error';
+    }
+});
 
-    node.innerText = (new Parser(new Tokenizer(document.getElementById('expression').value))).parse().evaluate();
+document.querySelectorAll('.js-calculator-button').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+        input.value += event.target.value;
+    })
+});
 
-    output.insertBefore(node, output.childNodes[0] || null);
+document.getElementById('delete').addEventListener('click', function () {
+    input.value = input.value.substr(0, input.value.length - 1);
+});
+
+document.getElementById('clear').addEventListener('click', function () {
+    input.value = '';
 });
