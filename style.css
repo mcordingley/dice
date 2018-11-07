@@ -6,13 +6,17 @@ body {
 .btn {
     background-color: whitesmoke;
     border: 1px solid silver;
+    cursor: pointer;
     min-height: 3em;
     transition: 200ms background-color;
 }
 
+.btn:active,
 .btn:hover { background-color: #ddd; }
 
 .btn--submit { background-color: #eef; }
+
+.btn--submit:active,
 .btn--submit:hover { background-color: #bebee5; }
 
 .grid { display: grid; }
