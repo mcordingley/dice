@@ -75,13 +75,13 @@ class Parser {
 
         const token = this.currentToken;
 
+        if (this.accept('DICE')) {
+            const [number, sides] = token.value.split('d');
+
+            return new Nodes.Dice(number, sides);
+        }
+
         if (this.accept('NUMBER')) {
-            if (token.value.includes('d')) {
-                const [number, sides] = token.value.split('d');
-
-                return new Nodes.Dice(number, sides);
-            }
-
             return new Nodes.Float(token.value);
         }
 

@@ -14,13 +14,15 @@ class Tokenizer {
             return null;
         }
 
-        let character = this.input.charAt(this.position);
-
-        if (Tokenizer.operators[character]) {
+        if (Tokenizer.operators[this.character]) {
             return this.operator();
         }
 
-        if (Tokenizer.isDigit(character)) {
+        if ((new RegExp('^.{' + this.position + '}\\d+d\\d+[a-z]*', 'i')).test(this.input)) {
+            return this.dice();
+        }
+
+        if (Tokenizer.isDigit(this.character)) {
             return this.number();
         }
 
@@ -43,14 +45,29 @@ class Tokenizer {
         return token;
     }
 
-    number() {
+    dice() {
         let value = '';
 
-        do {
+        while (Tokenizer.isDigit(this.character) || Tokenizer.isLetter(this.character)) {
             value += this.character;
 
             this.consume();
-        } while (Tokenizer.isDigit(this.character) || Tokenizer.isLetter(this.character) || this.character === '.');
+        }
+
+        return {
+            type: 'DICE',
+            value,
+        };
+    }
+
+    number() {
+        let value = '';
+
+        while (Tokenizer.isDigit(this.character) || this.character === '.') {
+            value += this.character;
+
+            this.consume();
+        }
 
         return {
             type: 'NUMBER',
