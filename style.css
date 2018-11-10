@@ -15,7 +15,6 @@ body {
 .btn:hover { background-color: #ddd; }
 
 .btn--submit { background-color: #eef; }
-
 .btn--submit:active,
 .btn--submit:hover { background-color: #bebee5; }
 
@@ -26,12 +25,20 @@ body {
 .grid-col-span-3 { grid-column: span 3; }
 .grid-col-span-4 { grid-column: span 4; }
 
+.h100 { height: 100%; }
+.mw800px { max-width: 800px; }
+.w100 { width: 100%; }
+
+.p1 { padding: .5rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
 .block { display: block; }
+
 .border { border: 1px solid; }
 .border-box { box-sizing: border-box; }
 .border-silver { border-color: silver; }
+
 .center { text-align: center; }
-.h100 { height: 100%; }
-.mx-auto { margin-left: auto; margin-right: auto; }
-.p1 { padding: .5rem; }
 .right-align { text-align: right; }
+
+.text-muted { color: gray; }

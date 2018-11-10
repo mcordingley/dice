@@ -26,7 +26,7 @@ class Tokenizer {
             return this.number();
         }
 
-        throw Error('Parse failure!');
+        throw Error('Unable to Parse Expression');
     }
 
     consume() {

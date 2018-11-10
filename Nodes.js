@@ -2,16 +2,22 @@ export class Dice {
     constructor(number, sides) {
         this.number = number;
         this.sides = sides;
+
+        this.rolls = [];
     }
 
     evaluate() {
-        let total = 0;
+        this.rolls = [];
 
         for (let i = 0; i < this.number; i++) {
-            total += Dice.roll(1, this.sides);
+            this.rolls.push(Dice.roll(1, this.sides));
         }
 
-        return total;
+        return this.rolls.reduce((total, roll) => total + roll, 0);
+    }
+
+    toString() {
+        return '[' + this.rolls.join(', ') + ']';
     }
 
     static roll(min, max) {
@@ -27,6 +33,10 @@ export class Float {
     evaluate() {
         return parseFloat(this.value);
     }
+
+    toString() {
+        return '' + this.value;
+    }
 }
 
 class BinaryOperator {
@@ -40,11 +50,19 @@ export class Add extends BinaryOperator {
     evaluate() {
         return this.left.evaluate() + this.right.evaluate();
     }
+
+    toString() {
+        return '(' + this.left.toString() + ' + ' + this.right.toString() + ')';
+    }
 }
 
 export class Subtract extends BinaryOperator {
     evaluate() {
         return this.left.evaluate() - this.right.evaluate();
+    }
+
+    toString() {
+        return '(' + this.left.toString() + ' - ' + this.right.toString() + ')';
     }
 }
 
@@ -52,11 +70,19 @@ export class Multiply extends BinaryOperator {
     evaluate() {
         return this.left.evaluate() * this.right.evaluate();
     }
+
+    toString() {
+        return this.left.toString() + ' * ' + this.right.toString();
+    }
 }
 
 export class Divide extends BinaryOperator {
     evaluate() {
         return this.left.evaluate() / this.right.evaluate();
+    }
+
+    toString() {
+        return this.left.toString() + ' / ' + this.right.toString();
     }
 }
 
@@ -67,5 +93,9 @@ export class Negate {
 
     evaluate() {
         return -this.value.evaluate();
+    }
+
+    toString() {
+        return '-' + this.right.toString();
     }
 }
