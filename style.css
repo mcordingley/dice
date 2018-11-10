@@ -14,14 +14,22 @@ body {
 .btn:active,
 .btn:hover { background-color: #ddd; }
 
+.flex { display: flex; }
+.flex-auto { flex: 1 1 auto; }
+.flex-column { flex-direction: column; }
+
 .grid { display: grid; }
 .grid-gap-1 { grid-gap: 0.5rem; }
 .grid-col-4 { grid-template-columns: repeat(4, 1fr); }
 .grid-col-span-3 { grid-column: span 3; }
 
+.right { float: right; }
+
 .mw800px { max-width: 800px; }
+.vh100 { min-height: 100vh; }
 
 .p1 { padding: .5rem; }
+.m0 { margin: 0; }
 .mx-auto { margin-left: auto; margin-right: auto; }
 
 .border { border: 1px solid; }
@@ -35,4 +43,6 @@ body {
 .bg-active-light-purple:hover { background-color: #b8b8ff; }
 .bg-hover-light-purple:hover { background-color: #b8b8ff; }
 
+.text-decoration-none { text-decoration: none; }
 .text-muted { color: gray; }
+.text-smaller { font-size: 80%; }
