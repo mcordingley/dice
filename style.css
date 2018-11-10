@@ -21,21 +21,14 @@ body {
 .grid { display: grid; }
 .grid-gap-1 { grid-gap: 0.5rem; }
 .grid-col-4 { grid-template-columns: repeat(4, 1fr); }
-.grid-col-span-2 { grid-column: span 2; }
 .grid-col-span-3 { grid-column: span 3; }
-.grid-col-span-4 { grid-column: span 4; }
 
-.h100 { height: 100%; }
 .mw800px { max-width: 800px; }
-.w100 { width: 100%; }
 
 .p1 { padding: .5rem; }
 .mx-auto { margin-left: auto; margin-right: auto; }
 
-.block { display: block; }
-
 .border { border: 1px solid; }
-.border-box { box-sizing: border-box; }
 .border-silver { border-color: silver; }
 
 .center { text-align: center; }
