@@ -14,10 +14,6 @@ body {
 .btn:active,
 .btn:hover { background-color: #ddd; }
 
-.btn--submit { background-color: #eef; }
-.btn--submit:active,
-.btn--submit:hover { background-color: #bebee5; }
-
 .grid { display: grid; }
 .grid-gap-1 { grid-gap: 0.5rem; }
 .grid-col-4 { grid-template-columns: repeat(4, 1fr); }
@@ -29,9 +25,14 @@ body {
 .mx-auto { margin-left: auto; margin-right: auto; }
 
 .border { border: 1px solid; }
+.border-gray { border-color: grey; }
 .border-silver { border-color: silver; }
 
 .center { text-align: center; }
 .right-align { text-align: right; }
+
+.bg-purple { background-color: #8c8cfe; }
+.bg-active-light-purple:hover { background-color: #b8b8ff; }
+.bg-hover-light-purple:hover { background-color: #b8b8ff; }
 
 .text-muted { color: gray; }
