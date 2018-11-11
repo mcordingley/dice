@@ -1,5 +1,17 @@
 import * as Nodes from './Nodes.js';
 
+const diceExtractor = /^(\d+)d(\d+)/,
+    dropLowestExtractor = /s\d*/,
+    dropHighestExtractor = /S\d*/,
+    explodeLowestExtractor = /x\d*/,
+    explodeHighestExtractor = /X\d*/,
+    rerollLowestExtractor = /r\d*/,
+    rerollHighestExtractor = /R\d*/;
+
+function extractNumberFromModifier(modifier, fallback) {
+    return parseInt(modifier.substr(1) || fallback, 10);
+}
+
 class Parser {
     constructor(tokenizer) {
         this.tokenizer = tokenizer;
@@ -76,9 +88,25 @@ class Parser {
         const token = this.currentToken;
 
         if (this.accept('DICE')) {
-            const [number, sides] = token.value.split('d');
+            const diceParts = diceExtractor.exec(token.value),
+                numberOfDice = diceParts[1],
+                sidesOnDice = diceParts[2],
+                dropHighest = dropHighestExtractor.exec(token.value),
+                explodeHighest = explodeHighestExtractor.exec(token.value),
+                rerollHighest = rerollHighestExtractor.exec(token.value),
+                dropLowest = dropLowestExtractor.exec(token.value),
+                explodeLowest = explodeLowestExtractor.exec(token.value),
+                rerollLowest = rerollLowestExtractor.exec(token.value),
+                dice = new Nodes.Dice(numberOfDice, sidesOnDice);
 
-            return new Nodes.Dice(number, sides);
+            if (dropHighest) dice.dropHighest = extractNumberFromModifier(dropHighest[0], 1);
+            if (explodeHighest) dice.explodeHighest = extractNumberFromModifier(explodeHighest[0], sidesOnDice);
+            if (rerollHighest) dice.rerollHighest = extractNumberFromModifier(rerollHighest[0], sidesOnDice);
+            if (dropLowest) dice.dropLowest = extractNumberFromModifier(dropLowest[0], 1);
+            if (explodeLowest) dice.explodeLowest = extractNumberFromModifier(explodeLowest[0], 1);
+            if (rerollLowest) dice.rerollLowest = extractNumberFromModifier(rerollLowest[0], 1);
+
+            return dice;
         }
 
         if (this.accept('NUMBER')) {

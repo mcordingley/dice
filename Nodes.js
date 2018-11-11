@@ -3,14 +3,49 @@ export class Dice {
         this.number = number;
         this.sides = sides;
 
+        this.dropHighest = false;
+        this.dropLowest = false;
+        this.explodeHighest = false;
+        this.explodeLowest = false;
+        this.rerollHighest = false;
+        this.rerollLowest = false;
+
         this.rolls = [];
     }
 
     evaluate() {
         this.rolls = [];
 
-        for (let i = 0; i < this.number; i++) {
-            this.rolls.push(Dice.roll(1, this.sides));
+        let roll;
+
+        for (let i = 0, count = this.number; i < count; i++) {
+            roll = Dice.roll(1, this.sides);
+
+            if (
+                this.rerollHighest && roll >= this.rerollHighest ||
+                this.rerollLowest && roll <= this.rerollLowest
+            ) {
+                roll = Dice.roll(1, this.sides);
+            }
+
+            if (
+                this.explodeHighest && roll >= this.explodeHighest ||
+                this.explodeLowest && roll <= this.explodeLowest
+            ) {
+                count++;
+            }
+
+            this.rolls.push(roll);
+        }
+
+        this.rolls.sort();
+
+        if (this.dropHighest) {
+            this.rolls.splice(-this.dropHighest, this.dropHighest);
+        }
+
+        if (this.dropLowest) {
+            this.rolls.splice(0, this.dropLowest);
         }
 
         return this.rolls.reduce((total, roll) => total + roll, 0);
