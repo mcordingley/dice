@@ -18,11 +18,15 @@ class Tokenizer {
             return this.operator();
         }
 
-        if ((new RegExp('^.{' + this.position + '}\\d+d\\d+[a-z]*', 'i')).test(this.input)) {
+        if ((new RegExp('^.{' + this.position + '}\\d*d\\d+[a-z]*', 'i')).test(this.input)) {
             return this.dice();
         }
 
-        if (Tokenizer.isDigit(this.character)) {
+        if (Tokenizer.isLetter(this.character)) {
+            return this.function();
+        }
+
+        if (Tokenizer.isDigit(this.character) || this.character === '.') {
             return this.number();
         }
 
@@ -56,6 +60,21 @@ class Tokenizer {
 
         return {
             type: 'DICE',
+            value,
+        };
+    }
+
+    function() {
+        let value = '';
+
+        while (Tokenizer.isLetter(this.character)) {
+            value += this.character;
+
+            this.consume();
+        }
+
+        return {
+            type: 'FUNCTION',
             value,
         };
     }
@@ -96,6 +115,7 @@ Tokenizer.operators = {
     "-": "MINUS",
     "*": "MULTIPLY",
     "/": "DIVIDE",
+    ",": "COMMA",
 };
 
 export default Tokenizer;

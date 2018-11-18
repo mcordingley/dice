@@ -60,6 +60,46 @@ export class Dice {
     }
 }
 
+export class Binomial {
+    constructor(trials, probability, successes) {
+        this.trials = trials;
+        this.probability = probability;
+        this.successes = successes;
+    }
+
+    evaluate() {
+        return Binomial.cdf(Math.round(this.trials.evaluate()), this.probability.evaluate(), Math.round(this.successes.evaluate()));
+    }
+
+    static cdf(trials, probability, successes) {
+        let cumulative = 0.0;
+
+        for (let i = 0; i <= successes; i++) {
+            cumulative += Binomial.pmf(trials, probability, i);
+        }
+
+        return cumulative;
+    }
+
+    static pmf(trials, probability, successes) {
+        return Binomial.combinations(trials, successes)
+            * Math.pow(probability, successes)
+            * Math.pow(1 - probability, trials - successes);
+    }
+
+    static combinations(populationSize, subsetSize) {
+        if (subsetSize === 0 || populationSize === subsetSize) {
+            return 1;
+        }
+
+        return (populationSize / subsetSize) * Binomial.combinations(populationSize - 1, subsetSize - 1);
+    }
+
+    toString() {
+        return 'bin(' + this.trials.toString() + ', ' + this.probability.toString() + ', ' + this.successes.toString() + ')';
+    }
+}
+
 export class Float {
     constructor(value) {
         this.value = value;

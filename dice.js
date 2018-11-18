@@ -8,18 +8,17 @@ const input = document.getElementById('input'),
 document.getElementById('dice').addEventListener('submit', function (event) {
     event.preventDefault();
 
-    let expression = input.value;
-
-    if (expression.startsWith('d')) {
-        expression = '1' + expression;
-    }
-
-    expression = expression.replace(/[^\d]d\d+/g, match => match.substr(0, 1) + '1' + match.substr(1));
-
     try {
-        const parsed = (new Parser(new Tokenizer(expression))).parse();
+        const parsed = (new Parser(new Tokenizer(input.value))).parse();
 
-        output.innerText = parsed.evaluate();
+        let evaluated = parsed.evaluate(),
+            parts = ('' + evaluated).split('.');
+
+        if (parts.length === 2 && parts[1].length > 4) {
+            evaluated = evaluated.toFixed(4);
+        }
+
+        output.innerText = evaluated;
         miscOutput.innerText = parsed.toString();
     } catch (exception) {
         output.innerText = 'Error';
@@ -27,9 +26,21 @@ document.getElementById('dice').addEventListener('submit', function (event) {
     }
 });
 
+function getButtonValue(button) {
+    return typeof button.dataset.calculatorValue !== 'undefined' ?
+        button.dataset.calculatorValue :
+        button.value;
+}
+
 document.querySelectorAll('.js-calculator-button').forEach(function (button) {
     button.addEventListener('click', function (event) {
-        input.value += event.target.value;
+        input.value += getButtonValue(event.target);
+    })
+});
+
+document.querySelectorAll('.js-function-button').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+        input.value += getButtonValue(event.target) + '(';
     })
 });
 

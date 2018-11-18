@@ -1,12 +1,16 @@
 import * as Nodes from './Nodes.js';
 
-const diceExtractor = /^(\d+)d(\d+)/,
+const diceExtractor = /^(\d*)d(\d+)/,
     dropLowestExtractor = /s\d*/,
     dropHighestExtractor = /S\d*/,
     explodeLowestExtractor = /x\d*/,
     explodeHighestExtractor = /X\d*/,
     rerollLowestExtractor = /r\d*/,
     rerollHighestExtractor = /R\d*/;
+
+const functions = {
+    'bin': Nodes.Binomial,
+};
 
 function extractNumberFromModifier(modifier, fallback) {
     return parseInt(modifier.substr(1) || fallback, 10);
@@ -88,32 +92,57 @@ class Parser {
         const token = this.currentToken;
 
         if (this.accept('DICE')) {
-            const diceParts = diceExtractor.exec(token.value),
-                numberOfDice = diceParts[1],
-                sidesOnDice = diceParts[2],
-                dropHighest = dropHighestExtractor.exec(token.value),
-                explodeHighest = explodeHighestExtractor.exec(token.value),
-                rerollHighest = rerollHighestExtractor.exec(token.value),
-                dropLowest = dropLowestExtractor.exec(token.value),
-                explodeLowest = explodeLowestExtractor.exec(token.value),
-                rerollLowest = rerollLowestExtractor.exec(token.value),
-                dice = new Nodes.Dice(numberOfDice, sidesOnDice);
+            return Parser.dice(token);
+        }
 
-            if (dropHighest) dice.dropHighest = extractNumberFromModifier(dropHighest[0], 1);
-            if (explodeHighest) dice.explodeHighest = extractNumberFromModifier(explodeHighest[0], sidesOnDice);
-            if (rerollHighest) dice.rerollHighest = extractNumberFromModifier(rerollHighest[0], sidesOnDice);
-            if (dropLowest) dice.dropLowest = extractNumberFromModifier(dropLowest[0], 1);
-            if (explodeLowest) dice.explodeLowest = extractNumberFromModifier(explodeLowest[0], 1);
-            if (rerollLowest) dice.rerollLowest = extractNumberFromModifier(rerollLowest[0], 1);
+        if (this.accept('FUNCTION')) {
+            this.expect('L_PAREN');
 
-            return dice;
+            const func = this.function(token);
+
+            this.expect('R_PAREN');
+
+            return func;
         }
 
         if (this.accept('NUMBER')) {
             return new Nodes.Float(token.value);
         }
 
-        throw Error('Expecting a number, received ' + token.value);
+        throw Error('Expecting a number, received ' + this.currentToken.value);
+    }
+
+    static dice(token) {
+        const diceParts = diceExtractor.exec(token.value),
+            numberOfDice = diceParts[1] === '' ? 1 : diceParts[1],
+            sidesOnDice = diceParts[2],
+            dropHighest = dropHighestExtractor.exec(token.value),
+            explodeHighest = explodeHighestExtractor.exec(token.value),
+            rerollHighest = rerollHighestExtractor.exec(token.value),
+            dropLowest = dropLowestExtractor.exec(token.value),
+            explodeLowest = explodeLowestExtractor.exec(token.value),
+            rerollLowest = rerollLowestExtractor.exec(token.value),
+            dice = new Nodes.Dice(numberOfDice, sidesOnDice);
+
+        if (dropHighest) dice.dropHighest = extractNumberFromModifier(dropHighest[0], 1);
+        if (explodeHighest) dice.explodeHighest = extractNumberFromModifier(explodeHighest[0], sidesOnDice);
+        if (rerollHighest) dice.rerollHighest = extractNumberFromModifier(rerollHighest[0], sidesOnDice);
+        if (dropLowest) dice.dropLowest = extractNumberFromModifier(dropLowest[0], 1);
+        if (explodeLowest) dice.explodeLowest = extractNumberFromModifier(explodeLowest[0], 1);
+        if (rerollLowest) dice.rerollLowest = extractNumberFromModifier(rerollLowest[0], 1);
+
+        return dice;
+    }
+
+    function(token) {
+        const Node = functions[token.value],
+            args = [];
+
+        do {
+            args.push(this.expression());
+        } while (this.accept('COMMA'));
+
+        return new Node(...args);
     }
 }
 
