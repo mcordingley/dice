@@ -10,50 +10,93 @@
 </head>
 <body class="flex flex-column m0 vh100">
     <main class="flex-auto p1">
-        <div class="mw800px mx-auto">
+        <div class="mx-auto">
             <h1 id="output" class="center">Browser Gaming Dice</h1>
             <p id="output-misc" class="center text-muted">A dice-roller that will always be free to use.</p>
         </div>
 
-        <form id="dice" class="grid grid-col-4 grid-gap-1 mw800px mx-auto">
-            <input id="input" class="border border-silver grid-col-span-3 p1 right-align" />
-            <input type="submit" class="btn btn--submit bg-active-light-purple bg-hover-light-purple bg-purple border-gray" value="Roll" />
+        <div class="mw64rem mx-auto">
+            <form id="dice" class="grid grid-col-4 grid-gap-1 mw40rem mx-auto">
+                <input id="input" class="border border-silver grid-col-span-3 p1 right-align" />
+                <input type="submit" class="btn btn--submit bg-active-light-purple bg-hover-light-purple bg-purple border-gray" value="Roll" />
 
-            <input type="button" class="btn js-calculator-button" value="(">
-            <input type="button" class="btn js-calculator-button" value=")">
-            <input type="button" class="btn js-calculator-button" value=",">
-            <input type="button" id="clear" class="btn" value="Clear">
+                <input type="button" class="btn js-calculator-button" value="(">
+                <input type="button" class="btn js-calculator-button" value=")">
+                <input type="button" class="btn js-calculator-button" value=",">
+                <input type="button" id="clear" class="btn" value="Clear">
 
-            <input type="button" class="btn js-calculator-button" value="X">
-            <input type="button" class="btn js-calculator-button" value="R">
-            <input type="button" class="btn js-calculator-button" value="S">
-            <input type="button" id="delete" class="btn" value="Delete">
+                <input type="button" class="btn js-calculator-button" value="X">
+                <input type="button" class="btn js-calculator-button" value="R">
+                <input type="button" class="btn js-calculator-button" value="S">
+                <input type="button" id="delete" class="btn" value="Delete">
 
-            <input type="button" class="btn js-calculator-button" value="x">
-            <input type="button" class="btn js-calculator-button" value="r">
-            <input type="button" class="btn js-calculator-button" value="s">
-            <input type="button" class="btn js-function-button" data-calculator-value="bin" value="Bin CDF">
+                <input type="button" class="btn js-calculator-button" value="x">
+                <input type="button" class="btn js-calculator-button" value="r">
+                <input type="button" class="btn js-calculator-button" value="s">
+                <input type="button" class="btn js-function-button" data-calculator-value="bin" value="Bin CDF">
 
-            <input type="button" class="btn js-calculator-button" value="7">
-            <input type="button" class="btn js-calculator-button" value="8">
-            <input type="button" class="btn js-calculator-button" value="9">
-            <input type="button" class="btn js-calculator-button" value="/">
+                <input type="button" class="btn js-calculator-button" value="7">
+                <input type="button" class="btn js-calculator-button" value="8">
+                <input type="button" class="btn js-calculator-button" value="9">
+                <input type="button" class="btn js-calculator-button" value="/">
 
-            <input type="button" class="btn js-calculator-button" value="4">
-            <input type="button" class="btn js-calculator-button" value="5">
-            <input type="button" class="btn js-calculator-button" value="6">
-            <input type="button" class="btn js-calculator-button" value="*">
+                <input type="button" class="btn js-calculator-button" value="4">
+                <input type="button" class="btn js-calculator-button" value="5">
+                <input type="button" class="btn js-calculator-button" value="6">
+                <input type="button" class="btn js-calculator-button" value="*">
 
-            <input type="button" class="btn js-calculator-button" value="1">
-            <input type="button" class="btn js-calculator-button" value="2">
-            <input type="button" class="btn js-calculator-button" value="3">
-            <input type="button" class="btn js-calculator-button" value="-">
+                <input type="button" class="btn js-calculator-button" value="1">
+                <input type="button" class="btn js-calculator-button" value="2">
+                <input type="button" class="btn js-calculator-button" value="3">
+                <input type="button" class="btn js-calculator-button" value="-">
 
-            <input type="button" class="btn js-calculator-button" value="d">
-            <input type="button" class="btn js-calculator-button" value="0">
-            <input type="button" class="btn js-calculator-button" value=".">
-            <input type="button" class="btn js-calculator-button" value="+">
-        </form>
+                <input type="button" class="btn js-calculator-button" value="d">
+                <input type="button" class="btn js-calculator-button" value="0">
+                <input type="button" class="btn js-calculator-button" value=".">
+                <input type="button" class="btn js-calculator-button" value="+">
+            </form>
+
+            <h2 class="center">How to Use the Dice Roller</h2>
+
+            <div class="col-width-20rem">
+                <p class="mt0">
+                    Use the roller just as you would a handheld calculator. Use the buttons to enter an expression and
+                    then press "Roll" to get the value of the expression. Use standard "xdy" dice notation to represent
+                    the dice. For example, "2d6" would roll two six-sided dice. If you omit the first number, a one is
+                    assumed. So, "d6" will simply roll one six-sided die.
+                </p>
+
+                <p>
+                    The dice roller also includes a few modifiers that you can add on to a dice expression. Just add
+                    them on to the end of a dice expression to modify your rolls.
+                </p>
+
+                <p>
+                    "X" will explode the rolls on the die's maximum value, while "x" will explode rolls on the die's
+                    minimum value. An "exploded" die is rolled again and again while it comes up with an exploding value.
+                    If a number is included after the letter, the dice will explode on the provided number or a number
+                    closer to the maximum (or minimum). So, "d6X5" will explode on a five or six.
+                </p>
+
+                <p>
+                    "S" will skip (or drop) the highest roll from the dice expression. "s" will skip the lowest roll
+                    from the dice expression. If you include a number after the modifier, the roller will skip that many
+                    dice from the expression. e.g. "4d6s2" will roll four six-sided dice and then drop the two lowest
+                    rolls.
+                </p>
+
+                <p>
+                    "Bin CDF" calculates the
+                    <a href="https://en.wikipedia.org/wiki/Cumulative_distribution_function" target="_blank">cumulative distribution function</a>
+                    of the <a href="https://en.wikipedia.org/wiki/Binomial_distribution" target="_blank">binomial distribution</a>.
+                    It takes three arguments: the number of trials, the probability of success per trial, and the number
+                    of successes. For example, "bin(10,1/3,5)" will give the probability of getting five or fewer
+                    successes when attempting ten trials, each with a 1/3 chance of success. This is useful to determine
+                    the odds of success when a game requires several dice to be rolled and needs so many "successes" for
+                    something to happen.
+                </p>
+            </div>
+        </div>
     </main>
 
     <footer class="p1 text-muted">
