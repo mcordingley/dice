@@ -36,6 +36,15 @@ a:visited {
 .grid-col-span-2 { grid-column: span 2; }
 .grid-col-span-3 { grid-column: span 3; }
 
+@media screen and (min-width: 40em) {
+    .sm-grid-col-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media screen and (min-width: 52em) {
+    .md-grid-col-3 { grid-template-columns: repeat(3, 1fr); }
+    .md-grid-col-span-3 { grid-column: span 3; }
+}
+
 .right { float: right; }
 
 .mw40rem { max-width: 40rem; }
@@ -58,8 +67,8 @@ a:visited {
 .bg-active-light-purple:hover { background-color: #b8b8ff; }
 .bg-hover-light-purple:hover { background-color: #b8b8ff; }
 
-.col-width-20rem { column-width: 20rem; }
-
+.small-caps { font-variant: small-caps; }
 .text-decoration-none { text-decoration: none; }
 .text-muted { color: gray; }
+.text-purple { color: #6d6dc7; }
 .text-smaller { font-size: 80%; }
