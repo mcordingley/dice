@@ -3,6 +3,12 @@ body {
     line-height: 1.6;
 }
 
+h1,
+h2,
+h3 {
+    font-family: Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;
+}
+
 a {
     text-decoration: none;
 }
