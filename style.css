@@ -21,15 +21,11 @@ a:visited {
 }
 
 .btn {
-    background-color: whitesmoke;
     border: 1px solid silver;
     cursor: pointer;
     min-height: 3em;
     transition: 200ms background-color;
 }
-
-.btn:active,
-.btn:hover { background-color: #ddd; }
 
 .flex { display: flex; }
 .flex-auto { flex: 1 1 auto; }
@@ -63,6 +59,8 @@ a:visited {
 .m0 { margin: 0; }
 .mb0 { margin-bottom: 0; }
 .mt0 { margin-top: 0; }
+.mb1 { margin-bottom: .5rem; }
+.mr1 { margin-right: .5rem; }
 .mx-auto { margin-left: auto; margin-right: auto; }
 
 .border { border: 1px solid; }
@@ -72,9 +70,22 @@ a:visited {
 .center { text-align: center; }
 .right-align { text-align: right; }
 
-.bg-purple { background-color: #8c8cfe; }
-.bg-active-light-purple:hover { background-color: #b8b8ff; }
+.bg-blanched-almond { background-color: blanchedalmond; }
+
+.bg-light-gray,
+.active-bg-light-gray:active,
+.hover-bg-light-gray:hover { background-color: #ddd; }
+
+.bg-light-purple,
+.bg-active-light-purple:active,
 .bg-hover-light-purple:hover { background-color: #b8b8ff; }
+
+.bg-tan,
+.bg-active-tan:active,
+.bg-hover-tan:hover { background-color: #e5c39a; }
+
+.bg-purple { background-color: #8c8cfe; }
+.bg-white-smoke { background-color: whitesmoke; }
 
 .letter-spaced { letter-spacing: .05em; }
 .small-caps { font-variant: small-caps; }
