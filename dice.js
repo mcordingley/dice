@@ -33,6 +33,13 @@ history.addEventListener('click', function (event) {
 document.getElementById('dice').addEventListener('submit', function (event) {
     event.preventDefault();
 
+    if (input.value === '') {
+        output.innerText = 'Error';
+        miscOutput.innerText = 'No input provided.';
+
+        return;
+    }
+
     try {
         const parsed = (new Parser(new Tokenizer(input.value))).parse();
 
