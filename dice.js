@@ -38,12 +38,6 @@ document.querySelectorAll('.js-calculator-button').forEach(function (button) {
     })
 });
 
-document.querySelectorAll('.js-function-button').forEach(function (button) {
-    button.addEventListener('click', function (event) {
-        input.value += getButtonValue(event.target) + '(';
-    })
-});
-
 document.getElementById('delete').addEventListener('click', function () {
     input.value = input.value.substr(0, input.value.length - 1);
 });
