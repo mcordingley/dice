@@ -76,7 +76,10 @@ a:visited {
 .bg-active-light-purple:hover { background-color: #b8b8ff; }
 .bg-hover-light-purple:hover { background-color: #b8b8ff; }
 
+.letter-spaced { letter-spacing: .05em; }
 .small-caps { font-variant: small-caps; }
+.uppercase { text-transform: uppercase; }
+
 .text-decoration-none { text-decoration: none; }
 .text-muted { color: gray; }
 .text-purple { color: #6d6dc7; }

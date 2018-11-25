@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body class="flex flex-column m0 vh100">
-    <main class="flex-auto p1">
-        <div>
-            <h1 id="output" class="center">Browser Gaming Dice</h1>
+    <main class="flex-auto">
+        <div class="p1">
+            <h1 id="output" class="center letter-spaced uppercase">Browser Gaming Dice</h1>
             <p id="output-misc" class="center text-muted">A dice-roller that will always be free to use.</p>
         </div>
 
-        <div class="mw64rem mx-auto">
+        <div class="mw64rem mx-auto p1">
             <form id="dice" class="grid grid-col-4 grid-gap-1 mw32rem mx-auto">
                 <input id="input" class="border border-silver grid-col-span-3 p1 right-align" />
                 <input type="submit" class="btn btn--submit bg-active-light-purple bg-hover-light-purple bg-purple border-gray" value="Roll" />
@@ -71,7 +71,7 @@
                 them on to the end of a dice expression to modify your rolls.
             </p>
 
-            <h3 class="mb0">Modifiers</h3>
+            <h3 class="mb0 text-muted">Modifiers</h3>
 
             <div class="grid grid-gap-2 sm-grid-col-2 md-grid-col-3">
                 <div>
@@ -109,7 +109,7 @@
                 </div>
             </div>
 
-            <h3>Binomial Cumulative Distribution</h3>
+            <h3 class="text-muted">Binomial Cumulative Distribution</h3>
 
             <p>
                 "Bin CDF" calculates the
