@@ -19,7 +19,12 @@ function makeHistoryButton(expression) {
 (function () {
     const fragment = document.createDocumentFragment();
 
-    ['d20', '2d6', 'd100'].map(makeHistoryButton).forEach(button => fragment.appendChild(button));
+    [
+        'd20',
+        '2d6',
+        'd100',
+        'd8+1',
+    ].map(makeHistoryButton).forEach(button => fragment.appendChild(button));
 
     history.appendChild(fragment);
 })();
