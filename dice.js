@@ -58,8 +58,14 @@ document.getElementById('dice').addEventListener('submit', function (event) {
         output.innerText = evaluated;
         miscOutput.innerText = parsed.toString();
 
-        if (!history.querySelector('input[value="' + input.value + '"]')) {
-            history.prepend(makeHistoryButton(input.value));
+        const shortcut = history.querySelector('input[value="' + input.value + '"]') || makeHistoryButton(input.value);
+
+        if (shortcut.parentElement && shortcut.parentElement.firstElementChild !== shortcut) {
+            shortcut.remove();
+        }
+
+        if (!shortcut.parentElement) {
+            history.prepend(shortcut);
         }
     } catch (exception) {
         output.innerText = 'Error';
