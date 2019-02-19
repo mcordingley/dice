@@ -22,6 +22,10 @@ function makeHistoryButton(expression) {
     try {
         pastRolls = JSON.parse(window.localStorage.getItem('history'));
     } catch (e) {
+        //
+    }
+
+    if (!pastRolls) {
         pastRolls = [
             'd20',
             '2d6',
