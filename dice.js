@@ -17,14 +17,22 @@ function makeHistoryButton(expression) {
 }
 
 (function () {
+    let pastRolls;
+
+    try {
+        pastRolls = JSON.parse(window.localStorage.getItem('history'));
+    } catch (e) {
+        pastRolls = [
+            'd20',
+            '2d6',
+            'd100',
+            'd8+1',
+        ];
+    }
+
     const fragment = document.createDocumentFragment();
 
-    [
-        'd20',
-        '2d6',
-        'd100',
-        'd8+1',
-    ].map(makeHistoryButton).forEach(button => fragment.appendChild(button));
+    pastRolls.map(makeHistoryButton).forEach(button => fragment.appendChild(button));
 
     history.appendChild(fragment);
 })();
@@ -64,8 +72,19 @@ document.getElementById('dice').addEventListener('submit', function (event) {
             shortcut.remove();
         }
 
-        if (!shortcut.parentElement) {
+        if (!shortcut.parentElement && history.children.length < 50) {
             history.prepend(shortcut);
+        }
+
+        try {
+            window.localStorage.setItem(
+                'history',
+                JSON.stringify(
+                    Array.from(history.querySelectorAll('input')).map(input => input.value).slice(0, 50)
+                )
+            );
+        } catch (e) {
+            // Intentionally drop silently.
         }
     } catch (exception) {
         output.innerText = 'Error';
